@@ -5,14 +5,27 @@ $fa = 1;
 // Minimum size
 $fs = 0.1;
 
-/* [Colors for previews] */
-// See wiki: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#color
-// Color of Square
-squareColor = "Aqua"; // [Lavender, Thistle, Plum, Violet, Orchid, Fuchsia, Magenta, MediumOrchid, MediumPurple, BlueViolet, DarkViolet, DarkOrchid, DarkMagenta, Purple, Indigo, DarkSlateBlue, SlateBlue, MediumSlateBlue]
-// Color of Tabs
-tabColor = "RoyalBlue";
-// Color of Slots
-slotColor = "Magenta";
+/* [Tabs and Slots] */
+// South Tab
+tabSouth = true;
+// North Tab
+tabNorth = false;
+// East Tab
+tabEast = false;
+// West Tab
+tabWest = false;
+
+// Between Tabs (Above) and Slots (Below)
+spacer = 0; // [0]
+
+// South Slot
+slotSouth = false;
+// North Slot
+slotNorth = true;
+// East Slot
+slotEast = false;
+// West Slot
+slotWest = false;
 
 /* [Scale and clearance] */
 // Better to use squareSize and squareHeight
@@ -33,6 +46,16 @@ squareHeight = 5;
 tabHeight = squareHeight / 2;
 tabLength = squareSize / 4;
 
+/* [Colors for previews] */
+// See wiki: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#color
+// Color of Square
+squareColor = "Aqua";
+// Color of Tabs
+tabColor = "RoyalBlue";
+// Color of Slots
+slotColor = "Magenta";
+
+/* [Hidden] */ // Just in case, normally not shown by default
 // Tab Cutout
 tabCutoutWidth = tabLength * 0.5;
 tabCutoutLength = tabLength * 2;
@@ -149,19 +172,17 @@ scale(scale) {
   difference() {
     square();
     color(slotColor) {
-      // Add slots here:
-      // slotSouth();
-      slotNorth();
-      // slotEast();
-      // slotWest();
+      if(slotSouth) slotSouth();
+      if(slotNorth) slotNorth();
+      if(slotEast) slotEast();
+      if(slotWest) slotWest();
     }
   }
   color(tabColor) {
-    // Add tabs here:
-    tabSouth();
-    // tabNorth();
-    // tabEast();
-    // tabWest();
+    if(tabSouth) tabSouth();
+    if(tabNorth) tabNorth();
+    if(tabEast) tabEast();
+    if(tabWest) tabWest();
   }
 }
 
